@@ -1,0 +1,12 @@
+extends Node
+
+enum SkillTypes {
+	ATTACK,
+	STRENGTH,
+	DEFENCE,
+	HITPOINTS,
+	ENDURANCE,
+	FARMING,
+	CRAFTING,
+	WOODCUTTING
+}

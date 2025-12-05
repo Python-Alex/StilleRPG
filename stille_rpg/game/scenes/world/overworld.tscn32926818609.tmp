@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://71w3gly4uifa"]
+
+[ext_resource type="Script" uid="uid://dlabfadtuxqww" path="res://game/scenes/world/overworld.gd" id="1_kbf6v"]
+[ext_resource type="PackedScene" uid="uid://bdwcuwseeptki" path="res://game/player/player.tscn" id="1_t0nq7"]
+
+[node name="Overworld" type="Node2D"]
+script = ExtResource("1_kbf6v")
+
+[node name="Player" parent="." instance=ExtResource("1_t0nq7")]
+z_index = 5

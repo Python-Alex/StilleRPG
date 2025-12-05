@@ -1,0 +1,124 @@
+[gd_scene load_steps=10 format=3 uid="uid://dkck5bna7wngy"]
+
+[ext_resource type="Script" uid="uid://c6su5wf7m167l" path="res://game/item/item.gd" id="1_1x78i"]
+[ext_resource type="Texture2D" uid="uid://cncfknhwhgky6" path="res://assets/icons/HaySeed.png" id="1_d3uyk"]
+[ext_resource type="Texture2D" uid="uid://bft41pj0d4w32" path="res://assets/gui/InventoryHeader.png" id="3_33hu0"]
+[ext_resource type="Texture2D" uid="uid://dfeg65kpcqwxq" path="res://assets/gui/ContextPanelPanelSelectionInactive.png" id="4_yyo6e"]
+[ext_resource type="Texture2D" uid="uid://bepyiuyulr0na" path="res://assets/gui/ContextPanelPanelSelectionActive.png" id="5_v24hl"]
+[ext_resource type="FontFile" uid="uid://12tu83igoh13" path="res://assets/fonts/Anxel.ttf" id="6_r3d7y"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1x78i"]
+radius = 16.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_r3d7y"]
+load_path = "res://.godot/imported/ContextPanelPanelSelectionInactive.png-109089beb2c7e88fc99c593fe85609ad.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_kpppo"]
+load_path = "res://.godot/imported/ContextPanelPanelSelectionActive.png-d3a8efdf761db0cfb5665a73e83a9f14.ctex"
+
+[node name="GrassSeed" type="Area2D"]
+script = ExtResource("1_1x78i")
+item_id = 512
+item_name = "Grass Seed"
+item_description = "A seed used for making grass!"
+max_stack = 64
+item_value = 1
+item_icon = ExtResource("1_d3uyk")
+is_stackable = true
+is_tradeable = true
+is_droppable = true
+equipment_slot = 11
+equipment_type = 3
+required_level = 0
+consumable_type = 6
+use_effect = 10
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_1x78i")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_d3uyk")
+
+[node name="Control" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = -20.0
+offset_top = 19.0
+offset_right = 20.0
+offset_bottom = 78.0
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.5254237
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_33hu0")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="ExamineButton" type="TextureButton" parent="Control/TextureRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.025
+anchor_top = 0.050847456
+anchor_right = 0.975
+anchor_bottom = 0.45161292
+offset_bottom = 1.576271
+texture_normal = ExtResource("4_yyo6e")
+texture_pressed = ExtResource("5_v24hl")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="Control/TextureRect/ExamineButton"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.13157895
+anchor_top = 0.17857143
+anchor_right = 0.8684211
+anchor_bottom = 0.75
+theme_override_fonts/font = ExtResource("6_r3d7y")
+theme_override_font_sizes/font_size = 8
+text = "Examine"
+metadata/_edit_use_anchors_ = true
+
+[node name="DestoryButton" type="TextureButton" parent="Control/TextureRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.025
+anchor_top = 0.48387098
+anchor_right = 0.975
+anchor_bottom = 0.9163477
+offset_bottom = 0.5932236
+grow_horizontal = 2
+grow_vertical = 0
+texture_normal = SubResource("CompressedTexture2D_r3d7y")
+texture_pressed = SubResource("CompressedTexture2D_kpppo")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="Control/TextureRect/DestoryButton"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.13157895
+anchor_top = 0.17857143
+anchor_right = 0.8684211
+anchor_bottom = 0.75
+theme_override_colors/font_color = Color(1, 0.21960784, 0.21960784, 1)
+theme_override_fonts/font = ExtResource("6_r3d7y")
+theme_override_font_sizes/font_size = 8
+text = "Destroy"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="."]
+offset_left = 13.0
+offset_top = 9.0
+offset_right = 18.0
+offset_bottom = 17.0
+theme_override_fonts/font = ExtResource("6_r3d7y")
+theme_override_font_sizes/font_size = 8
+text = "0"

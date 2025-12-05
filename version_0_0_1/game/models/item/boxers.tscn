@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://cyfdjk2ppj3mk"]
+
+[ext_resource type="Script" uid="uid://c70qncjrqgkhy" path="res://game/models/item/boxers.gd" id="1_3vxtv"]
+[ext_resource type="Texture2D" uid="uid://74dsk6803jkh" path="res://assets/Items/item_boxers.png" id="1_xxdme"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xxdme"]
+radius = 8.0
+
+[node name="Boxers" type="TextureRect"]
+offset_right = 16.0
+offset_bottom = 16.0
+texture = ExtResource("1_xxdme")
+expand_mode = 1
+script = ExtResource("1_3vxtv")
+
+[node name="ItemPickupArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemPickupArea"]
+position = Vector2(8, 8)
+shape = SubResource("CircleShape2D_xxdme")
+
+[connection signal="area_entered" from="ItemPickupArea" to="." method="_on_area_2d_area_entered"]

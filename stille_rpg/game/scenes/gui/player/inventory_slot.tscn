@@ -1,0 +1,161 @@
+[gd_scene load_steps=8 format=3 uid="uid://b4uw8ywlj3sf5"]
+
+[ext_resource type="Texture2D" uid="uid://dex0f3b1o7j5g" path="res://assets/gui/InventorySlotBorder.png" id="1_3kfje"]
+[ext_resource type="Texture2D" uid="uid://b8saa4erm6l8t" path="res://assets/icons/SelectBox.png" id="2_p3j4m"]
+[ext_resource type="Script" uid="uid://dl46k2iuxdl82" path="res://game/scenes/gui/player/inventory_slot.gd" id="2_val8b"]
+[ext_resource type="FontFile" uid="uid://12tu83igoh13" path="res://assets/fonts/Anxel.ttf" id="4_vlj5c"]
+[ext_resource type="Texture2D" uid="uid://l7js82nhxswb" path="res://assets/gui/SelectedItemBorder.png" id="5_6fgkr"]
+[ext_resource type="Texture2D" uid="uid://dfeg65kpcqwxq" path="res://assets/gui/ContextPanelPanelSelectionInactive.png" id="6_buuf3"]
+[ext_resource type="Texture2D" uid="uid://bepyiuyulr0na" path="res://assets/gui/ContextPanelPanelSelectionActive.png" id="7_oxp78"]
+
+[node name="InventorySlot" type="TextureButton"]
+physics_interpolation_mode = 1
+z_index = 1
+anchors_preset = -1
+anchor_right = 0.034722224
+anchor_bottom = 0.061728396
+texture_normal = ExtResource("1_3kfje")
+stretch_mode = 0
+script = ExtResource("2_val8b")
+metadata/_edit_use_anchors_ = true
+
+[node name="ItemTexture" type="TextureRect" parent="."]
+z_index = 2
+layout_mode = 0
+anchor_left = 0.083333336
+anchor_top = 0.083333336
+anchor_right = 0.9166667
+anchor_bottom = 0.875
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="HoverIcon" type="TextureRect" parent="."]
+visible = false
+z_index = 3
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.083333336
+anchor_top = 0.083333336
+anchor_right = 0.9166667
+anchor_bottom = 0.875
+texture = ExtResource("2_p3j4m")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="."]
+z_index = 4
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.4
+anchor_top = 0.65921056
+anchor_right = 0.625
+anchor_bottom = 0.8592106
+offset_top = -0.36842155
+offset_bottom = -0.36842155
+theme_override_fonts/font = ExtResource("4_vlj5c")
+theme_override_font_sizes/font_size = 8
+text = "64"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="SelectedItemSummary" type="TextureRect" parent="."]
+z_index = 10
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = -0.025
+anchor_right = 3.125
+anchor_bottom = 1.575
+mouse_filter = 0
+texture = ExtResource("5_6fgkr")
+metadata/_edit_use_anchors_ = true
+
+[node name="Use" type="TextureButton" parent="SelectedItemSummary"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.035714284
+anchor_top = 0.03333379
+anchor_right = 0.96428573
+anchor_bottom = 0.375
+offset_right = 0.07142639
+offset_bottom = 0.33335114
+texture_normal = ExtResource("6_buuf3")
+texture_pressed = ExtResource("7_oxp78")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="SelectedItemSummary/Use"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.050180856
+anchor_top = 0.26426306
+anchor_right = 0.94761676
+anchor_bottom = 0.6246236
+theme_override_fonts/font = ExtResource("4_vlj5c")
+theme_override_font_sizes/font_size = 8
+text = "Use"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Equip" type="TextureButton" parent="SelectedItemSummary"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.03571429
+anchor_top = 0.3249998
+anchor_right = 0.96428573
+anchor_bottom = 0.65
+offset_right = 0.07142639
+offset_bottom = 0.9999924
+texture_normal = ExtResource("6_buuf3")
+texture_pressed = ExtResource("7_oxp78")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="SelectedItemSummary/Equip"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1261302
+anchor_top = 0.2844042
+anchor_right = 0.8541509
+anchor_bottom = 0.6513766
+theme_override_fonts/font = ExtResource("4_vlj5c")
+theme_override_font_sizes/font_size = 8
+text = "Equip"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Drop" type="TextureButton" parent="SelectedItemSummary"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.03571429
+anchor_top = 0.6249998
+anchor_right = 0.96428573
+anchor_bottom = 0.95
+offset_right = 0.07142639
+offset_bottom = 0.9999924
+texture_normal = ExtResource("6_buuf3")
+texture_pressed = ExtResource("7_oxp78")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="SelectedItemSummary/Drop"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1261302
+anchor_top = 0.27522987
+anchor_right = 0.8541509
+anchor_bottom = 0.64220226
+theme_override_fonts/font = ExtResource("4_vlj5c")
+theme_override_font_sizes/font_size = 8
+text = "Drop"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="SelectedItemSummary/Drop" to="." method="_on_drop_pressed"]
