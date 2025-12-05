@@ -1,7 +1,8 @@
-[gd_scene load_steps=133 format=3 uid="uid://bdwcuwseeptki"]
+[gd_scene load_steps=134 format=3 uid="uid://bdwcuwseeptki"]
 
 [ext_resource type="Script" uid="uid://dphig2hhoqc2p" path="res://game/player/player.gd" id="1_obar5"]
 [ext_resource type="Texture2D" uid="uid://dkmdsdw1arxis" path="res://game/player/sprites/16x32 Idle-Sheet.png" id="2_b2mth"]
+[ext_resource type="Script" uid="uid://cli7d0f4hklxa" path="res://game/player/player_camera.gd" id="2_eeltd"]
 [ext_resource type="Texture2D" uid="uid://dgapuli3q23xo" path="res://game/player/sprites/16x32 Idle-Sheet-Mirrored.png" id="3_8soms"]
 [ext_resource type="Texture2D" uid="uid://bd0iddc3urcq5" path="res://game/player/sprites/16x32 Run-Sheet.png" id="4_4ste8"]
 [ext_resource type="Texture2D" uid="uid://cwwb3bsbpcku4" path="res://game/player/sprites/16x32 Walk-Sheet.png" id="4_5fytw"]
@@ -912,6 +913,7 @@ script = ExtResource("1_obar5")
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
+script = ExtResource("2_eeltd")
 
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3.5)
@@ -1103,6 +1105,7 @@ texture = SubResource("CompressedTexture2D_gh012")
 metadata/_edit_use_anchors_ = true
 
 [node name="ItemSummaryPanel" type="TextureRect" parent="UI/ContextPanelBackground/InventoryPanel"]
+visible = false
 z_index = 10
 layout_mode = 1
 anchors_preset = -1

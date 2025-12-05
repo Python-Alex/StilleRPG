@@ -20,6 +20,10 @@ config/icon="res://icon.svg"
 WorldItemManager="*res://autoload/world_item_manager.gd"
 GameTypes="*res://autoload/game_types.gd"
 
+[display]
+
+window/size/mode=4
+
 [input]
 
 move_down={
