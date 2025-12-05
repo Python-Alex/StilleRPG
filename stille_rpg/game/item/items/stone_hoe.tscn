@@ -18,6 +18,7 @@ load_path = "res://.godot/imported/ContextPanelPanelSelectionActive.png-d3a8efdf
 
 [node name="StoneHoe" type="Area2D"]
 script = ExtResource("1_bjvls")
+item_id = 513
 is_equippable = true
 is_tradeable = true
 is_droppable = true

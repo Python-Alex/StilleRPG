@@ -22,11 +22,11 @@ func _gui_input(event: InputEvent) -> void:
 func _on_pressed() -> void:
 	if selected:
 		selected = false
-		update_selection_visual()  # ADD THIS!
+		update_selection_visual()
 		slot_deselected.emit(self)
 	else:
 		selected = true
-		update_selection_visual()  # ADD THIS!
+		update_selection_visual()
 		slot_selected.emit(self)
 
 func update_display() -> void:
@@ -72,20 +72,6 @@ func _on_mouse_exited() -> void:
 	if not selected:  # Only hide hover if not selected
 		$HoverIcon.visible = false
 
-func _on_drop_pressed() -> void:
-	var scene = WorldItemManager.__item_scene_ref[item_data.id]
-	var instance = scene.instantiate()
-	#ugly method of getting the player node
-	var player = get_parent().get_parent().get_parent().get_parent().get_parent().get_parent()
-	var _position = player.get_position_outside_player()
-	
-	instance.position = _position
-	WorldItemManager.add_item_to_world(instance)
-	instance.set_item_data(item_data)
-	
-	# Remove and free this slot from inventory
-	player.inventory.remove_item_slot(self)
-	
 func clear_slot() -> void:
 	# Clear item data
 	item_data = {}

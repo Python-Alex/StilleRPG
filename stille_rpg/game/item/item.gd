@@ -64,12 +64,17 @@ var is_control_visible : bool = false
 @export var is_material: bool = false
 @export var crafting_ingredients: Array = []
 
+# Drop/pickup management
+var can_be_picked_up: bool = true
+var drop_cooldown_timer: Timer = null
+const DROP_PICKUP_COOLDOWN: float = 5.0  # 5 second cooldown after dropping
+
 # Visual components
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var collision: CollisionShape2D = $CollisionShape2D
 @onready var control_node: Control = $Control
 
-signal item_picked_up(item_data: Dictionary)
+signal item_picked_up(item_data: Dictionary, item_instance: ItemBase)
 
 func _ready():
 	
@@ -102,21 +107,62 @@ func _ready():
 		control_node.mouse_exited.connect(_on_control_mouse_exited)
 		
 func _on_update() -> void:
-	$Label.text = "%d" % [stack_size]
+	if has_node("Label"):
+		$Label.text = "%d" % [stack_size]
 
 func _on_body_entered(body):
 	if(body.name == "Player"):
 		pickup(body)
 
 func pickup(_player):
+	# Check if item can be picked up (cooldown check)
+	if not can_be_picked_up:
+		return
+	
 	# Create item data dictionary
 	var item_data = get_item_data()
 	
-	# Emit signal with item data
-	item_picked_up.emit(item_data)
+	# Emit signal with item data AND item instance (before we free it!)
+	item_picked_up.emit(item_data, self)
 	
 	# You can add pickup effects here (sound, particle, etc.)
 	queue_free()
+
+func drop(drop_position: Vector2) -> void:
+	"""
+	Drops this item at the specified position.
+	This is called when an item needs to be dropped from inventory.
+	"""
+	# Set the position
+	global_position = drop_position
+	
+	# Start pickup cooldown
+	can_be_picked_up = false
+	
+	# Create cooldown timer if it doesn't exist
+	if drop_cooldown_timer == null:
+		drop_cooldown_timer = Timer.new()
+		drop_cooldown_timer.one_shot = true
+		drop_cooldown_timer.timeout.connect(_on_drop_cooldown_finished)
+		add_child(drop_cooldown_timer)
+	
+	# Start the cooldown
+	drop_cooldown_timer.start(DROP_PICKUP_COOLDOWN)
+	
+	# Visual feedback - make item slightly transparent during cooldown
+	if sprite:
+		sprite.modulate = Color(1, 1, 1, 0.6)
+
+func _on_drop_cooldown_finished() -> void:
+	"""
+	Called when the drop cooldown timer expires.
+	Re-enables pickup for this item.
+	"""
+	can_be_picked_up = true
+	
+	# Restore normal appearance
+	if sprite:
+		sprite.modulate = Color(1, 1, 1, 1)
 
 func get_item_data() -> Dictionary:
 	return {
@@ -250,8 +296,8 @@ func set_item_data(item_data: Dictionary) -> void:
 	is_material = item_data.get("is_material", false)
 	crafting_ingredients = item_data.get("crafting_ingredients", [])
 	
-	# Update sprite if icon changed
-	if item_icon:
+	# Update sprite if icon changed and sprite is ready
+	if item_icon and sprite:
 		sprite.texture = item_icon
 	
 	_on_update()

@@ -115,12 +115,52 @@ func toggle_ui_visibility() -> void:
 
 
 func _on_item_summary_use_pressed() -> void:
-	pass # Replace with function body.
+	# Get the currently selected slot
+	if inventory.selected_slots.size() == 0:
+		return
+	
+	var selected_slot = inventory.selected_slots[0]
+	var item_data = selected_slot.item_data
+	
+	# TODO: Implement use logic based on item type
+	print("Used item: ", item_data.name)
 
 
 func _on_item_summary_drop_pressed() -> void:
-	pass # Replace with function body.
+	# Get the currently selected slot
+	if inventory.selected_slots.size() == 0:
+		return
+	
+	var selected_slot = inventory.selected_slots[0]
+	var item_data = selected_slot.item_data
+	
+	# Get a safe drop position outside player's interaction area
+	var drop_position = get_position_outside_player(150.0, 50.0)
+	
+	# Use WorldItemManager to handle the drop
+	await WorldItemManager._player_item_drop(item_data, drop_position)
+	
+	# Remove the slot from inventory after successful drop
+	inventory.remove_item_slot(selected_slot)
+	
+	# Hide the item summary panel
+	var summary_panel = $UI/ContextPanelBackground/InventoryPanel/ItemSummaryPanel
+	if summary_panel:
+		summary_panel.hide()
 
 
 func _on_item_summary_equip_pressed() -> void:
-	pass # Replace with function body.
+	# Get the currently selected slot
+	if inventory.selected_slots.size() == 0:
+		return
+	
+	var selected_slot = inventory.selected_slots[0]
+	var item_data = selected_slot.item_data
+	
+	# Check if item is equippable
+	if not item_data.get("is_equippable", false):
+		print("Cannot equip this item!")
+		return
+	
+	# TODO: Implement equip logic
+	print("Equipped item: ", item_data.name)
